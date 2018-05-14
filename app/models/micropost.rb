@@ -10,8 +10,8 @@ class Micropost < ApplicationRecord
 
     #アップロードされた画像のサイズをバリデーションする
     def picture_size
-      if picture.size > 5.megabytes
-        errors.add(:picture, "should be less then 5MB")
+      if picture.size > 2.megabytes
+        errors.add(:picture, "should be less then 2MB")
       end
     end
 end
