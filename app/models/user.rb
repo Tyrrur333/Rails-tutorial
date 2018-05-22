@@ -8,16 +8,18 @@ class User < ApplicationRecord
                                    dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+
   attr_accessor :remember_token, :activation_token, :reset_token
-  before_save   {email.downcase!}
+  before_save   { email.downcase! }
   before_create :create_activation_digest
-  validates :name, presence: true, length: {maximum: 50}
+
+  validates :name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  validates :email, presence: true, length: {maximum: 255},
+  validates :email, presence: true, length: { maximum: 255 },
                     format: {with: VALID_EMAIL_REGEX},
                     uniqueness: {case_sensitive: false}
   has_secure_password
-  validates :password, presence: true, length: {minimum: 6}, allow_nil: true
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   class << self
 
@@ -100,6 +102,15 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
+
+  def self.search(search)
+    if search
+      where(['name LIKE?', "%#{search}%"]) #検索とnameの部分一致を表示。#User.は省略
+    else
+      all #全て表示。 #User.は省略
+    end
+  end
+
 
   private
 

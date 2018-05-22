@@ -5,12 +5,16 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
 
   def index
-    @users = User.where(activated: true).paginate(page: params[:page])
+    #検索拡張機能として.search(params[:search])を追加
+    @users = User.where(activated: true).paginate(page: params[:page]).search(params[:search])
   end
 
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page])
+    #検索拡張機能として.search(params[:search])を追加
+    @microposts = @user.microposts.paginate(page: params[:page]).search(params[:search])
+    #like拡張機能
+    @likes = Like.where(micropost_id: params[:micropost_id])
   end
 
   def new
@@ -21,7 +25,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
-      flash[:info] = "Please check your email to activate your account."
+      flash[:info] = "メールアドレスを確認してアクティベートしてください！"
       redirect_to root_url
     else
       render 'new'
@@ -29,11 +33,13 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def update
+    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = "プロフィールを更新しました"
       redirect_to @user
     else
       render 'edit'
@@ -42,7 +48,7 @@ class UsersController < ApplicationController
 
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "user deleted"
+    flash[:success] = "ユーザーを削除しました"
     redirect_to users_url
   end
 
@@ -67,6 +73,7 @@ class UsersController < ApplicationController
     end
 
     #beforeアクション
+
 
     #正しいユーザーかどうか確認
     def correct_user

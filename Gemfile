@@ -18,6 +18,8 @@ gem 'jbuilder',                 '2.7.0'
 
 gem 'gravtastic'
 
+gem 'mail-iso-2022-jp'
+
 group :development, :test do
   gem 'sqlite3', '1.3.13'
   gem 'byebug',  '9.0.6', platform: :mri
@@ -28,6 +30,12 @@ group :development do
   gem 'listen',                '3.1.5'
   gem 'spring',                '2.0.2'
   gem 'spring-watcher-listen', '2.0.1'
+  
+   # エラー画面をわかりやすく整形してくれる
+  gem 'better_errors'
+
+  # better_errorsの画面上にirb/pry(PERL)を表示する
+  gem 'binding_of_caller'
 end
 
 group :test do
@@ -39,9 +47,7 @@ group :test do
 end
 
 group :production do
-  gem 'pg',  '0.18.4'
+  gem 'pg',  '0.20.0'
   gem 'fog', '1.42'
 end
 
-# Windows環境ではtzinfo-dataというgemを含める必要があります
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

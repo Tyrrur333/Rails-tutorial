@@ -1,7 +1,15 @@
-<% provide(:title, 'All users') %>
-<h1>All users</h1>
+<% provide(:title, 'ユーザー一覧') %>
+<h1>ユーザー一覧</h1>
 
 <%= will_paginate %>
+
+<!--検索拡張機能 ※未実装-->
+
+<!--<p>ユーザーの検索</p>-->
+<!--<%= form_tag(users_path) do %>-->
+<!--  <%= text_field_tag :search %>-->
+<!--  <%= submit_tag '検索する', :name => nil %>-->
+<!--<% end %>-->
 
 <ul class="users">
   <% @users.each do |user| %>

@@ -32,6 +32,10 @@ textarea {
   }
 }
 
+.ad {
+  text-align: center;
+}
+
 /* typography */
 
 h1, h2, h3, h4 , h5, h6 {
@@ -71,7 +75,7 @@ p {
   padding-top: 9px;
   font-weight: bold;
   &:hover{
-    color: white;
+    color: #ADFF2F;
     text-decoration: none;
   }
 }
@@ -186,6 +190,10 @@ aside {
 
 .users.follow {
   padding: 0;
+}
+
+.home_icon {
+  margin: 0 50px 15px 0;
 }
 
 /* forms */

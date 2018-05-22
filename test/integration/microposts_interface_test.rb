@@ -19,13 +19,13 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     content = "This micropost really ties the room together"
     picture = fixture_file_upload('test/fixtures/kitten.jpg', 'image/jpg')
     assert_difference 'Micropost.count', 1 do
-      post microposts_path, micropost: { content: content, picture: picture }
+      post microposts_path, params: { micropost: { content: content, picture: picture } }
     end
     assert assigns(:micropost).picture?
     follow_redirect!
     assert_match content, response.body
     #投稿を削除する
-    assert_select 'a', text: 'delete'
+    assert_select 'a', text: '削除'
     first_micropost = @user.microposts.paginate(page: 1).first
     assert_difference 'Micropost.count', -1 do
       delete micropost_path(first_micropost)
