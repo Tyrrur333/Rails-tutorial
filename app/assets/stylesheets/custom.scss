@@ -63,6 +63,19 @@ p {
   line-height: 1.7em;
 }
 
+/*bootstrap*/
+
+.jumbotron {
+  background-image: url(KAZUHIRO171013109_TP_V4.jpg);
+  background-position: right 20px;
+  background-repeat: no-repeat;
+  background-position: 40% 40% ;
+  margin-top: 40px;
+
+  background-size: cover;
+	position: relative;
+}
+
 /*header*/
 
 #logo {
@@ -83,6 +96,7 @@ p {
 /* footer */
 
 footer {
+  background-color: #99FFFF;
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid $gray-medium-light;
